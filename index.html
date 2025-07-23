@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人作品集</title>
+    <script src="https://cdn.tailwindcss.com/3.3.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0F172A;
+            color: #E2E8F0;
+            overflow-x: hidden;
+        }
+        
+        .neon-text {
+            text-shadow: 0 0 8px rgba(59, 130, 246, 0.7);
+        }
+        
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.5);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #3B82F6, #8B5CF6);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .timeline-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            border: 2px solid #0F172A;
+            position: absolute;
+            left: -15px;
+        }
+        
+        .timeline-line {
+            width: 2px;
+            background: linear-gradient(to bottom, #3B82F6, #8B5CF6);
+        }
+        
+        .upload-area {
+            border: 2px dashed rgba(226, 232, 240, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .upload-area:hover {
+            border-color: #3B82F6;
+            background-color: rgba(59, 130, 246, 0.05);
+        }
+        
+        .video-placeholder {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+        }
+        
+        .play-btn {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+        
+        .play-btn:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .timeline-content {
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body class="grid-bg">
+    <div id="particles-js"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-center">
+                <div class="text-xl font-bold neon-text">个人作品集</div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-300 hover:text-white">首页</a>
+                    <a href="#portfolio" class="nav-link text-gray-300 hover:text-white">作品集</a>
+                    <a href="#experience" class="nav-link text-gray-300 hover:text-white">经历</a>
+                    <a href="#skills" class="nav-link text-gray-300 hover:text-white">技能</a>
+                </div>
+                
+                <button class="md:hidden text-gray-300 focus:outline-none" id="mobile-menu-button">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div class="md:hidden hidden bg-gray-900 bg-opacity-90 backdrop-filter backdrop-blur-lg" id="mobile-menu">
+            <div class="container mx-auto px-6 py-4 flex flex-col space-y-4">
+                <a href="#home" class="nav-link text-gray-300 hover:text-white">首页</a>
+                <a href="#portfolio" class="nav-link text-gray-300 hover:text-white">作品集</a>
+                <a href="#experience" class="nav-link text-gray-300 hover:text-white">经历</a>
+                <a href="#skills" class="nav-link text-gray-300 hover:text-white">技能</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 首页 -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20">
+        <div class="container mx-auto px-6 py-20 text-center fade-in">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 neon-text">梁拓帆</h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8">科技传播硕士 | 产品运营 | AI行业实践者</p>
+            
+            <div class="flex justify-center items-center space-x-4">
+                <a href="mailto:tuofan_liang@163.com" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-lg hover:shadow-xl transition-all">
+                    <i class="fas fa-envelope mr-2"></i>
+                    tuofan_liang@163.com
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 作品集 -->
+    <section id="portfolio" class="py-20 bg-gray-900 bg-opacity-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center neon-text fade-in">作品集</h2>
+            
+            <!-- 图像作品区 -->
+            <div class="mb-20 fade-in delay-1">
+                <h3 class="text-2xl font-semibold mb-8 text-blue-400">图像作品区</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- 作品1 -->
+                    <div class="card-hover">
+                        <img src="image/what-to-eat-in-spring.png" alt="图片作品1：立春养生食疗图" class="rounded-lg h-64 w-full object-cover mb-4">
+                        <div class="work-description bg-gray-800 bg-opacity-50 border border-gray-700 rounded-lg px-4 py-3 text-gray-300">
+                            <h4 class="font-medium text-blue-400 mb-1">立春养生食疗图</h4>
+                            <p class="text-sm">柔和水彩绘立春：蒸鱼暖羹、桃花初绽，笔墨流转间，诉时令食养之道。​（某AI中医助手产品配套宣传图）</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 作品2 -->
+                    <div class="card-hover">
+                        <img src="image/what-to-eat-in-summer.png" alt="图片作品2：各体质养生食疗图" class="rounded-lg h-64 w-full object-cover mb-4">
+                        <div class="work-description bg-gray-800 bg-opacity-50 border border-gray-700 rounded-lg px-4 py-3 text-gray-300">
+                            <h4 class="font-medium text-blue-400 mb-1">盛夏养生食疗配方</h4>
+                            <p class="text-sm">浅米基调绘血虚体质：插画人像、食疗方案与暖汤相映，清晰排版呈现中医食养要点。​（某AI中医助手产品配套宣传图）</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 作品3 -->
+                    <div class="card-hover">
+                        <img src="image/AImarketingcover.png" alt="图片作品3：《AI营销工具使用指南》首图" class="rounded-lg h-64 w-full object-cover mb-4">
+                        <div class="work-description bg-gray-800 bg-opacity-50 border border-gray-700 rounded-lg px-4 py-3 text-gray-300">
+                            <h4 class="font-medium text-blue-400 mb-1">AI工具箱Vol 01</h4>
+                            <p class="text-sm">手绘插画聚焦职场场景：专注女性、现代办公环境与智能工具相融，信息分层清晰，打造明快高效的笔记首图。​​（个人账号笔记首图）</p>
+                        </div>
+                    </div>
+            </div>
+            
+            <!-- 视频作品区 -->
+            <div class="fade-in delay-2">
+                <h3 class="text-2xl font-semibold mb-8 text-purple-400">视频作品区</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- 视频1 -->
+                    <video controls class="rounded-lg h-64 w-full object-cover mb-4">
+                        <source src="videos/CCBNvlog.mp4" type="video/mp4">
+                    </video>
+                    <div class="work-description bg-gray-800 bg-opacity-50 border border-gray-700 rounded-lg px-4 py-3 text-gray-300">
+                        <!-- 自定义视频标题 -->
+                        <h4 class="font-medium text-purple-400 mb-1">2025CCBN展会vlog</h4>
+                        <!-- 自定义视频描述 -->
+                        <p class="text-sm">记录2025年中国（北京）国际广播电视信息网络展览会，呈现活力动感科技盛宴。</p>
+                    </div>
+                </div>
+                    
+                    <!-- 视频2 -->
+                    <div class="card-hover">
+                        <video controls class="rounded-lg h-64 w-full object-cover mb-4">
+                            <source src="Teknoloji CimBom Ruhuyla Buluşuyor.mp4" type="video/mp4">
+                        </video>
+                        <div class="work-description bg-gray-800 bg-opacity-50 border border-gray-700 rounded-lg px-4 py-3 text-gray-300">
+                            <!-- 自定义视频标题 -->
+                            <h4 class="font-medium text-purple-400 mb-1">产品宣传短片</h4>
+                            <!-- 自定义视频描述 -->
+                            <p class="text-sm">土耳其Galatasaray球迷视角混剪：球队符号、人机足球竞技、情感彩蛋交织，探讨体育精神与科技的视觉叙事。​</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 经历 -->
+    <section id="experience" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center neon-text fade-in">教育与实习经历</h2>
+            
+            <div class="max-w-3xl mx-auto fade-in delay-1">
+                <!-- 教育经历 -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-semibold mb-6 text-blue-400 flex items-center">
+                        <i class="fas fa-graduation-cap mr-3"></i> 教育经历
+                    </h3>
+                    
+                    <div class="relative pl-20">
+                        <!-- 时间线1 -->
+                        <div class="mb-8 relative">
+                            <div class="absolute left-0 top-0 flex items-center justify-center w-8 h-8">
+                                <div class="timeline-dot"></div>
+                            </div>
+                            <div class="ml-4 timeline-content">
+                                <div class="text-lg font-semibold">2023.9-2026.6 中国科学院大学</div>
+                                <div class="text-gray-400 mb-2">科学技术史(科技传播方向) 硕士</div>
+                                <p class="text-gray-300">GPA: 3.9/4</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 时间线2 -->
+                        <div class="mb-8 relative">
+                            <div class="absolute left-0 top-0 flex items-center justify-center w-8 h-8">
+                                <div class="timeline-dot"></div>
+                            </div>
+                            <div class="ml-4 timeline-content">
+                                <div class="text-lg font-semibold">2019.9-2023.6 湖南师范大学</div>
+                                <div class="text-gray-400 mb-2">历史学 本科</div>
+                                <p class="text-gray-300">GPA: 4.5/5, 保研</p>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute left-4 top-0 bottom-0 w-0.5">
+                            <div class="timeline-line h-full"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 实习经历 -->
+                <div class="fade-in delay-2">
+                    <h3 class="text-2xl font-semibold mb-6 text-purple-400 flex items-center">
+                        <i class="fas fa-briefcase mr-3"></i> 实习经历
+                    </h3>
+                    
+                    <div class="relative pl-20">
+                        <!-- 时间线1 -->
+                        <div class="mb-8 relative">
+                            <div class="absolute left-0 top-0 flex items-center justify-center w-8 h-8">
+                                <div class="timeline-dot"></div>
+                            </div>
+                            <div class="ml-4 timeline-content">
+                                <div class="text-lg font-semibold">2025.4-2025.6 北京中科闻歌科技股份有限公司</div>
+                                <div class="text-gray-400 mb-2">市场运营</div>
+                                <ul class="text-gray-300 list-disc list-inside space-y-1">
+                                    <li>梳理AI+6大行业50+产品矩阵，制作多模态营销物料支撑全平台推广</li>
+                                    <li>参与国际数字经济展会筹备，负责客户接待与产品讲解助力商务拓展</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- 时间线2 -->
+                        <div class="mb-8 relative">
+                            <div class="absolute left-0 top-0 flex items-center justify-center w-8 h-8">
+                                <div class="timeline-dot"></div>
+                            </div>
+                            <div class="ml-4 timeline-content">
+                                <div class="text-lg font-semibold">2025.1-2025.3 第四范式(北京)技术有限公司</div>
+                                <div class="text-gray-400 mb-2">社区运营</div>
+                                <ul class="text-gray-300 list-disc list-inside space-y-1">
+                                    <li>聚焦土耳其市场构建"科技-文体-娱乐"内容池，3个月DAU提升28%</li>
+                                    <li>搭建数据监控体系，用Py+Excel聚类分析用户反馈优化运营策略</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- 时间线3 -->
+                        <div class="mb-8 relative">
+                            <div class="absolute left-0 top-0 flex items-center justify-center w-8 h-8">
+                                <div class="timeline-dot"></div>
+                            </div>
+                            <div class="ml-4 timeline-content">
+                                <div class="text-lg font-semibold">2024.9-2024.12 浙江清华长三角研究院</div>
+                                <div class="text-gray-400 mb-2">AI项目运营</div>
+                                <ul class="text-gray-300 list-disc list-inside space-y-1">
+                                    <li>参与PRD撰写制定可行性产品方案，完成AI前沿产品测评报告</li>
+                                    <li>输出中英双语版本及PPT可视化方案，助力团队捕捉市场趋势</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="absolute left-4 top-0 bottom-0 w-0.5">
+                            <div class="timeline-line h-full"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 技能 -->
+    <section id="skills" class="py-20 bg-gray-900 bg-opacity-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center neon-text fade-in">技能</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- 语言能力 -->
+                <div class="card-hover bg-gray-800 bg-opacity-50 rounded-xl p-6 fade-in delay-1">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-600 bg-opacity-20 flex items-center justify-center text-blue-400 mr-4">
+                            <i class="fas fa-language text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">语言能力</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-400 mt-1 mr-2"></i>
+                            <span>英语CET-6(550)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-400 mt-1 mr-2"></i>
+                            <span>法语DELF-A2</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-400 mt-1 mr-2"></i>
+                            <span>土耳其语入门</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 新媒体技能 -->
+                <div class="card-hover bg-gray-800 bg-opacity-50 rounded-xl p-6 fade-in delay-2">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-purple-600 bg-opacity-20 flex items-center justify-center text-purple-400 mr-4">
+                            <i class="fas fa-photo-film text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">新媒体技能</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-400 mt-1 mr-2"></i>
+                            <span>视频剪辑(Pr、剪映)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-400 mt-1 mr-2"></i>
+                            <span>海报制作(Ps)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-400 mt-1 mr-2"></i>
+                            <span>图文排版(PPT、公众号)</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- 数据分析 -->
+                <div class="card-hover bg-gray-800 bg-opacity-50 rounded-xl p-6 fade-in delay-3">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-600 bg-opacity-20 flex items-center justify-center text-indigo-400 mr-4">
+                            <i class="fas fa-chart-line text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold">数据分析</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-400 mt-1 mr-2"></i>
+                            <span>Excel</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-400 mt-1 mr-2"></i>
+                            <span>SQL</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-400 mt-1 mr-2"></i>
+                            <span>Python Matplotlib</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer class="py-8 text-center text-gray-500 text-sm">
+        <div class="container mx-auto px-6">
+            <p>© 2024 个人作品集. 保留所有权利.</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // 粒子动画背景
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#3B82F6"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": false,
+                        "anim": {
+                            "enable": false,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 40,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#3B82F6",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+            
+            // 导航栏滚动效果
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add("bg-gray-900", "bg-opacity-90", "backdrop-filter", "backdrop-blur-lg", "shadow-lg");
+                    navbar.classList.remove("bg-transparent");
+                } else {
+                    navbar.classList.remove("bg-gray-900", "bg-opacity-90", "backdrop-filter", "backdrop-blur-lg", "shadow-lg");
+                    navbar.classList.add("bg-transparent");
+                }
+            });
+            
+            // 移动端菜单切换
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                
+                // 切换图标
+                const icon = this.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            });
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // 如果是移动端菜单，点击后关闭菜单
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                            mobileMenuButton.querySelector('i').classList.remove('fa-times');
+                            mobileMenuButton.querySelector('i').classList.add('fa-bars');
+                        }
+                    }
+                });
+            });
+            
+            // 元素渐入动画
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                fadeInObserver.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
